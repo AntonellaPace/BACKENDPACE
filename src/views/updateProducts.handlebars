@@ -1,0 +1,26 @@
+<h2>Actualizar producto: {{product.title}}</h2>
+<p>{{product._id}}</p>
+<form method="POST" action="/api/products/{{product._id}}">
+    <label for="title">Producto: </label>
+    <input type="text" name="title" value="{{product.title}}" required>
+    <br><br>
+    <label for="description">Descripcion: </label>
+    <input type="text" name="description" value="{{product.description}}" required>
+    <br><br>
+    <label for="category">Categoria: </label>
+    <input type="text" name="category" value="{{product.category}}" required>
+    <br><br>
+    <label for="price">Precio: </label>
+    <input type="number" name="price" value="{{product.price}}" required>
+    <br><br>
+    <label for="thumbnail">URL de la imagen: </label>
+    <input type="text" name="thumbnail" value="{{product.thumbnail}}" required>
+    <br><br>
+    <label for="code">Codigo: </label>
+    <input type="text" name="code" value={{product.code}} required>
+    <br><br>
+    <label for="stock">Stock: </label>
+    <input type="text" name="stock" value="{{product.stock}}" required>
+    <br><br>
+    <button class="btn btn-primary" type="submit"> Actualizar Producto </button>
+</form>

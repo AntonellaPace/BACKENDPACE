@@ -1,0 +1,16 @@
+<h2>El ticket generado con el numero {{ticket}}</h2>
+<p>El costo total de los productos fue ${{amount}}</p>
+
+<p>Los siguientes productos pudieron ser procesados</p>
+<div class="cards">
+    {{#each productos}}
+        <div class="card" style="width: 18rem;">
+            <img src={{this.product.thumbnail}} class="card-img-top" alt="{{this.product.title}}">
+            <div class="card-body">
+                <h3 class="card-title">{{this.product.title}}</h3>
+                <p class="card-text">Precio: ${{this.product.price}}.-</p>
+                <p class="card-text">Cantidad: {{this.quantity}}</p>
+            </div>
+        </div>
+    {{/each}}
+</div>

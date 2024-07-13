@@ -1,0 +1,60 @@
+<div class="cards">
+    {{#each payload}}
+        <div class="card" style="width: 18rem;">
+            <img src={{this.thumbnail}} class="card-img-top" alt="{{this.title}}">
+            <div class="card-body">
+                <h5 class="card-title">{{this.title}}</h5>
+                <p class="card-text">{{this.description}}</p>
+                <p class="card-text">${{this.price}}.-</p>
+                {{#if ../userName}}
+                    {{#unless this.status}}
+                    <p class="card-text" style="color: red;">SIN STOCK</p>
+                    {{/unless}}
+                    {{#if ../rol}}
+                    <form action="/api/products/{{this._id}}" method="DELETE">
+                        <button type="submit" class="eliminarButton btn btn-danger">Eliminar producto</button>
+                    </form>
+                    <br><br>
+                    <form action="/updateProducts/{{this._id}}" method="GET">
+                        <button type="submit" class="btn btn-primary">Actualizar producto</button>
+                    </form>
+                    {{else}}
+                        {{#if this.status}}
+                        <form action="/api/carts/{{../cid}}/product/{{this._id}}" method="POST">
+                            <button type="submit" class="comprarButton btn btn-primary"> Comprar </button>
+                        </form>
+                        {{else}}
+                        <button href="#" class="btn btn-secondary" disabled>Sin stock</button>
+                        {{/if}}
+                    {{/if}}
+                {{/if}}
+            </div>
+        </div>
+    {{/each}}
+</div>
+
+<br>
+
+<div class="container">
+    {{#if firstPage}}
+        <button class="btn btn-secondary" href="#" disabled> Anterior </button>
+    {{/if}}
+
+    {{#if hasPrevPage}}
+        <a class="btn btn-secondary" href={{prevLink}}> Anterior </a>
+    {{/if}}
+
+    {{#if hasNextPage}}
+        <a class="btn btn-secondary" href={{nextLink}}> Siguiente </a>
+    {{/if}}
+
+    {{#unless hasNextPage}}
+        <button class="btn btn-secondary" href="#" disabled> Siguiente </button>
+    {{/unless}}
+
+    <p> Pagina {{currentPage}} de {{totalPages}} </p>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/comprarButton.js"></script>

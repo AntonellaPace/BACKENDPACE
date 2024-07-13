@@ -1,0 +1,76 @@
+import UserModel from "../models/user.model.js";
+import CartService from "./carts.services.js";
+import jwt from "jsonwebtoken";
+
+import { createHash, isValidPassword } from "../utils/hashbcrypt.js";
+import configObject from "../config/config.js";
+
+const { token_pass } = configObject;
+const cartService = new CartService();
+
+class UserService {
+    async registerUser(first_name, last_name, email, password, age) {
+        try {
+            let user = await UserModel.findOne({email});
+    
+            if(user) throw new Error("El usuario ya existe");
+    
+            const cart = await cartService.addCart(email);
+    
+            let newUser = {
+                first_name,
+                last_name,
+                email,
+                password: createHash(password),
+                age,
+                cart: cart._id
+            }
+    
+            await UserModel.create(newUser);
+            
+            const token = jwt.sign({email}, token_pass, {expiresIn: "1h"});
+
+            return token;
+        } catch (error) {
+            throw new Error(`${error}`);
+        }
+    }
+
+    async validateUser(email, password) {
+        try {
+            const user = await UserModel.findOne({email});
+    
+            if(!user) throw new Error("El usuario no existe");
+    
+            if(!isValidPassword(password, user)) throw new Error("Usuario y contraseña no coinciden");
+    
+            const token = jwt.sign({email}, token_pass, {expiresIn: "1h"});
+
+            return token;
+        } catch (error) {
+            throw new Error(`${error}`);
+        }
+    }
+
+    async findUser(email) {
+        try {
+            const user = await UserModel.findOne({email});
+
+            return user;
+        } catch (error) {
+            throw new Error(`${error}`);
+        }
+    }
+
+    async deleteUser(email) {
+        try {
+            const deletedUser = await UserModel.deleteOne({email});
+
+            return deletedUser;
+        } catch (error) {
+            throw new Error(`${error}`);
+        }
+    }
+}
+
+export default UserService;
