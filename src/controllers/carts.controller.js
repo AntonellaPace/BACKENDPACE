@@ -7,7 +7,7 @@ class CartController {
         try {
             const carts = await cartService.getCarts();
 
-            res.status(200).send(`Cart creado: ${carts}`);
+            req.logger.info(`Carts creados: ${carts}`);
         } catch (error) {
             next(error);
         }
@@ -16,10 +16,10 @@ class CartController {
     async addCart(req, res, next) {
         try {
             const user = req.user.email;
-            console.log(user);
+
             const newCart = await cartService.addCart(user);
 
-            res.status(200).send(`Cart creado: ${newCart}`);
+            req.logger.info(`Cart creado: ${newCart}`);
         } catch (error) {
             next(error);
         }
@@ -48,10 +48,12 @@ class CartController {
             const cid = req.params.cid;
             const pid = req.params.pid;
             const quantity = req.body.quantity || 1;
-        
+            
             const cart = await cartService.addProductToCart(cid, pid, quantity);
+            
 
-            console.log(`Cart actualizado: ${cart}`);
+            req.logger.info(`Cart actualizado: ${cart}`);
+
             res.redirect("/products");
         } catch (error) {
             next(error);
@@ -65,7 +67,7 @@ class CartController {
         
             const cart = await cartService.deleteProduct(cid, pid);
 
-            console.log(`Producto eliminado del Cart: ${cart}`);
+            req.logger.info(`Producto eliminado del Cart: ${cart}`);
         } catch (error) {
             next(error);
         }
@@ -78,7 +80,7 @@ class CartController {
 
             const updatedCart = await cartService.updateCart(cid, updatedProducts);
             
-            res.status(200).send(`Cart actualizado: ${updatedCart}`);
+            req.logger.info(`Cart actualizado: ${updatedCart}`);
         } catch (error) {
             next(error);
         }
@@ -92,7 +94,7 @@ class CartController {
 
             const updatedCart = await cartService.updateProduct(cid, pid, newQuantity);
             
-            res.status(200).send(`Cart actualizado: ${updatedCart}`);
+            req.logger.info(`Cart actualizado: ${updatedCart}`);
         } catch (error) {
             next(error);
         }
@@ -103,7 +105,19 @@ class CartController {
             const cid = req.params.cid;
             const deletedCart = await cartService.deleteCart(cid);
 
-            res.status(200).send(`El carrito ha sido eliminado: ${deletedCart}`);
+            req.logger.info(`El carrito ${deletedCart} fue eliminado`);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async vaciarCart (req, res, next ) {
+        const cid = req.params.cid;
+        try {
+            const cart = await cartService.vaciarCart(cid);
+
+            req.logger.info(`El cart ${cart} fue vaciado`)
+        
         } catch (error) {
             next(error);
         }

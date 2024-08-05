@@ -14,3 +14,4 @@ const configObject = {
 };
 
 export default configObject;
+

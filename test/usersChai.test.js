@@ -10,10 +10,8 @@ describe("Test de usuarios", function () {
         this.users = new UserService();
     });
 
-    //HACER EL BEFORE PARA LIMPIAR LA BASE DE DATOS PARA HACER UN NUEVO TEST
-
     it("Debe de crearse un usuario", async function() {
-        const res = await this.users.registerUser("prueba", "usuario", "prueba@usuario.com", "1234", 21);
+        const res = await this.users.registerUser("prueba", "usuario", "prueba@usuario.com", "1234", 26);
         expect(res).to.be.an("string");
     });
 

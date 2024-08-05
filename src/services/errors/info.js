@@ -11,25 +11,25 @@ export const getErrorInfo = (box, type) => {
         case 2: 
             return `Datos incompletos o no validos,
             Se esperaba:
-            - Title         : Needs to be a String, received ${box.title}
-            - Description   : Needs to be a String, received ${box.description}
-            - Price         : Needs to be a Number, received ${box.price}
-            - Code          : Needs to be a String, received ${box.code}
-            - Category      : Needs to be a String, received ${box.category}`;
-
+            - Title         : Debe ser un String, pero se recibio ${box.title}
+            - Category      : Debe ser un String, pero se recibio ${box.category}
+            - Description   : Debe ser un String, pero se recibio ${box.description}
+            - Price         : Debe ser un Number, pero se recibio ${box.price}
+            - Code          : Debe ser un String, pero se recibio ${box.code}`;
+            
         case 3:
-            return `Producto ${box.title} (id: ${box._id}) no encontrado`;
+            return `Producto ${box.title} con id: ${box._id} no encontrado`;
 
         case 4:
-            return `Codigo ${box.code} ya existe`;
+            return `El codigo ${box.code} ya existe`;
 
         case 5:
-            return `Error en la DB`;
+            return `Error en la BASE DE DATOS`;
 
         case 6: 
-            return `Carrito id ${box.cid} no existe`
+            return `El carrito con id: ${box.cid}, no existe`
 
         default:
-            return `Error no especificado`
+            return `Error no determinado`
     }
 }

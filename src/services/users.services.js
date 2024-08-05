@@ -30,9 +30,11 @@ class UserService {
             
             const token = jwt.sign({email}, token_pass, {expiresIn: "1h"});
 
+            await UserModel.findByIdAndUpdate(user._id, {last_connection: new Date()});
+
             return token;
         } catch (error) {
-            throw new Error(`${error}`);
+            throw new Error(error);
         }
     }
 
@@ -46,9 +48,11 @@ class UserService {
     
             const token = jwt.sign({email}, token_pass, {expiresIn: "1h"});
 
+            await UserModel.findByIdAndUpdate(user._id, {last_connection: new Date()});
+
             return token;
         } catch (error) {
-            throw new Error(`${error}`);
+            throw new Error(error);
         }
     }
 
@@ -58,7 +62,7 @@ class UserService {
 
             return user;
         } catch (error) {
-            throw new Error(`${error}`);
+            throw new Error(error);
         }
     }
 
@@ -68,7 +72,7 @@ class UserService {
 
             return deletedUser;
         } catch (error) {
-            throw new Error(`${error}`);
+            throw new Error(error);
         }
     }
 }

@@ -7,11 +7,12 @@ h1 {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    
 }
 
 .card {
     margin-left: 1rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
     border: 0.2rem solid #58696b;
     background-color: #e7fdff;
     align-items: center;
@@ -21,6 +22,10 @@ h1 {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+.card-img-top{
+    width: 80%;
 }
 
 .logo {
@@ -36,7 +41,7 @@ body {
 }
 
 header {
-    background-color: #fcd395;
+    background-color: #518654;
     color: rgb(0, 0, 0);
     padding: 10px 20px;
     display: flex;
@@ -64,5 +69,5 @@ nav a {
 }
 
 nav a:hover {
-    color: #ff0000;
+    color: #215733;
 }

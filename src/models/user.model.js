@@ -30,6 +30,17 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ["admin", "user"],
         default: "user"
+    },
+    resetToken: {
+        token: String,
+        expiresAt: Date
+    },
+    documents: {
+        type: Array,
+        default: []
+    },
+    last_connection: {
+        type: Date
     }
 });
 

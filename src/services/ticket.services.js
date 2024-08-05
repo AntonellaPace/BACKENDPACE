@@ -8,7 +8,7 @@ class TicketService {
 
             return deletedTicket;
         } catch (error) {
-            throw new Error(`${error}`);
+            throw new Error(error);
         }
     }
 
@@ -27,10 +27,10 @@ class TicketService {
                 await newTicket.save();
                 return newTicket;
             }else{
-                throw new Error(`No hay productos con suficiente stock en el carrito`);
+                throw new Error(`Hay productos del carrito que no tienen suficiente stock para tu compra`);
             }
         } catch (error) {
-            throw new Error(`${error}`);
+            throw new Error(error);
         }
     }
 
@@ -40,7 +40,7 @@ class TicketService {
             
             return tickets;
         } catch (error) {
-            throw new Error(`${error}`);
+            throw new Error(error);
         }
     }
 }

@@ -82,6 +82,25 @@ router.get("/mockingproducts", async (req, res) => {
         status: "success",
         payload: productos,
     });
+
+    router.get("/loggerTest", (req, res) => {
+        req.logger.fatal("Mensaje de error fatal");
+        req.logger.debug("Mensaje de debug");
+        req.logger.http("Mensaje de HTTP");
+        req.logger.warning("Mensaje de warning");
+        req.logger.info("Mensaje de info");
+        req.logger.error("Mensaje de error");
+    
+        res.send("Logs generados");
+    });
+    
+    router.get("/reset-password", (req, res) => {
+        res.render("resetPassword");
+    });
+    
+    router.get("/password", (req, res) => {
+        res.render("changePassword");
+    });
 });
 
 export default router;

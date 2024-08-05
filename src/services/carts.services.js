@@ -29,7 +29,7 @@ class CartService {
 
             if(!newCart){
                 throw CustomError.createError({
-                    name: "Carritos no creado",
+                    name: "Carrito no creado",
                     source: getErrorInfo({}, 5),
                     message: "Error al crear un carrito",
                     code: EErrors.DB_ERROR
@@ -48,7 +48,7 @@ class CartService {
         try {
             const cart = await CartModel.findById(cid);
 
-            if(!carts){
+            if(!cart){
                 throw CustomError.createError({
                     name: "Carrito no encontrado",
                     source: getErrorInfo({cid}, 6),
@@ -93,7 +93,7 @@ class CartService {
                 throw CustomError.createError({
                     name: "Producto no encontrado",
                     source: getErrorInfo({title: "", _id: pid}, 3),
-                    message: "Error al obtener los carritos",
+                    message: "Error al borrar el producto",
                     code: EErrors.DB_ERROR
                 });
             };
@@ -153,6 +153,15 @@ class CartService {
         } catch (error) {
             throw error;
         }
+    }
+
+    async vaciarCart(cid) {
+        try {
+            const cart = await CartModel.findByIdAndUpdate(cid, {products : []});
+        return cart;
+        } catch (error) {
+            throw error;
+        }  
     }
 }
 

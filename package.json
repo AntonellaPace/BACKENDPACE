@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "nodemon src/app.js --mode desarrollo",
     "start": "node src/app.js --mode produccion",
-    "test": "mocha test/supertest.test.js"
+    "testChai": "mocha test/supertest.test.js",
+    "supertest": "mocha test/userChai.test.js"
   },
   "keywords": [],
   "author": "",
@@ -32,11 +33,15 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.0",
     "mongoose-paginate-v2": "^1.8.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.14",
     "passport": "^0.7.0",
     "passport-github2": "^0.1.12",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "socket.io": "^4.7.5",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "winston": "^3.13.0"
   }
 }

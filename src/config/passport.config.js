@@ -22,8 +22,8 @@ const initializePassport = () => {
                 first_name: profile._json.name,
                 last_name: " ",
                 email: profile._json.email,
-                password: "imposibleDeHackear",
-                age: 36
+                password: "imposibleHackear",
+                age: 31
             }
 
             return done(null, user);

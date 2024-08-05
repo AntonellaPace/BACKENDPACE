@@ -16,7 +16,7 @@ describe("Testing de la APP WEB E-COMMERCE", () => {
                 stock: 100,
             }
 
-            const {statusCode, ok, _body} = await requester.post("/products").send(mockProduct);
+            const {statusCode, ok, _body} = await requester.post("/api/products").send(mockProduct);
 
             console.log(statusCode);
             console.log(ok);

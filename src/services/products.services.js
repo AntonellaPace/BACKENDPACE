@@ -13,7 +13,7 @@ class ProductService {
                 throw CustomError.createError({
                     name: "Producto no encontrado",
                     source: getErrorInfo({title: product.title, _id: pid}, 3),
-                    message: "Error al eliminar un producto",
+                    message: "Error al eliminar el producto",
                     code: EErrors.NOT_FOUND
                 });
             }
@@ -32,7 +32,7 @@ class ProductService {
                 throw CustomError.createError({
                     name: "Producto no encontrado",
                     source: getErrorInfo({title: newProduct.title, _id: pid}, 3),
-                    message: "Error al actualizar un producto",
+                    message: "Error al actualizar el producto",
                     code: EErrors.NOT_FOUND
                 });
             }
@@ -43,7 +43,7 @@ class ProductService {
         }
     }
 
-    async getProducts({limit = 10, page = 1, sort, query} = {}) {
+    async getProducts({limit = 5, page = 1, sort, query} = {}) {
         try {
             const skip = (page -1) * limit;
             
@@ -80,9 +80,9 @@ class ProductService {
 
             if(!products){
                 throw CustomError.createError({
-                    name: "No se pudieron obtener productos",
+                    name: "No se pudieron obtener los productos",
                     source: getErrorInfo({}, 5),
-                    message: "Error al obtener los producto",
+                    message: "Error al obtener los productos",
                     code: EErrors.DB_ERROR
                 });
             }
@@ -116,9 +116,9 @@ class ProductService {
 
             if(!title || !description || !category || !price || !code){
                 throw CustomError.createError({
-                    name: "Todos los campos son requeridos",
+                    name: "Todos los campos son obligatorios",
                     source: getErrorInfo({title, description, category, price, code}, 2),
-                    message: "Error al crear un producto",
+                    message: "Error al crear el producto",
                     code: EErrors.MISSING_FIELDS
                 });
             }
@@ -129,7 +129,7 @@ class ProductService {
                 throw CustomError.createError({
                     name: "Codigo ya utilizado",
                     source: getErrorInfo({code}, 4),
-                    message: "Error al crear un producto",
+                    message: "Error al crear el producto",
                     code: EErrors.INVALID_CODE
                 });
             }
