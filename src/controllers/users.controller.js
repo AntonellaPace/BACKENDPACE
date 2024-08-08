@@ -113,7 +113,7 @@ class UserController {
             }
 
             if (isValidPassword(password, user)) {
-                return res.status(400).send("La password ingresada debe ser distinta a la anterior");
+                return res.status(400).send("La contraseña ingresada debe ser distinta a la anterior");
             }
 
             user.password = createHash(password);
