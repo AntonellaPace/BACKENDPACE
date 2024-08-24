@@ -9,34 +9,34 @@ const { token_pass } = configObject;
 const cartService = new CartService();
 
 class UserService {
-    async registerUser(first_name, last_name, email, password, age) {
-        try {
-            let user = await UserModel.findOne({email});
-    
-            if(user) throw new Error("El usuario ya existe");
-    
-            const cart = await cartService.addCart(email);
-    
-            let newUser = {
-                first_name,
-                last_name,
-                email,
-                password: createHash(password),
-                age,
-                cart: cart._id
+        async registerUser(first_name, last_name, email, password, age) {
+            try {
+                let user = await UserModel.findOne({email});
+        
+                if(user) throw new Error("El usuario ya existe");
+        
+                const cart = await cartService.addCart(email);
+        
+                let newUser = {
+                    first_name,
+                    last_name,
+                    email,
+                    password: createHash(password),
+                    age,
+                    cart: cart._id
+                };
+        
+                const createdUser = await UserModel.create(newUser); // Create the user and get the created user object
+                
+                const token = jwt.sign({email}, token_pass, {expiresIn: "1h"});
+        
+                await UserModel.findByIdAndUpdate(createdUser._id, {last_connection: new Date()});
+        
+                return token;
+            } catch (error) {
+                throw new Error(`Registration failed: ${error.message}`);
             }
-    
-            await UserModel.create(newUser);
-            
-            const token = jwt.sign({email}, token_pass, {expiresIn: "1h"});
-
-            await UserModel.findByIdAndUpdate(user._id, {last_connection: new Date()});
-
-            return token;
-        } catch (error) {
-            throw new Error(error);
         }
-    }
 
     async validateUser(email, password) {
         try {

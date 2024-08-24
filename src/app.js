@@ -5,14 +5,14 @@ import { errorHandler } from "./middleware/error.js";
 import productsRouter from "./routes/products.router.js";
 import cartsRouter from "./routes/carts.router.js";
 import viewsRouter  from "./routes/views.router.js";
-import sessionsRouter from "./routes/users.router.js";
+import userRouter from "./routes/users.router.js";
 
 import "./utils/init.js";
 
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/", viewsRouter);
-app.use("/api/sessions", sessionsRouter);
+app.use("/api/users", userRouter);
 
 app.use(errorHandler);
 

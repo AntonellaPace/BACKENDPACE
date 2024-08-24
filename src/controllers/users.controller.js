@@ -11,22 +11,22 @@ const { cookie, token_pass } = configObject;
 const userService = new UserService();
 
 class UserController {
-    async registerUser(req, res) {
-        try {
-            const {first_name, last_name, email, password, age} = req.body;
-
-            const token = await userService.registerUser(first_name, last_name, email, password, age);
-    
-            res.cookie(cookie, token, {
-                maxAge: 300000,
-                httpOnly: true
-            });
-    
-            res.redirect("/products");
-        } catch (error) {
-            req.logger.error(`No se pudo registrar el usuario, ${error}`);
+        async registerUser(req, res) {
+            try {
+                const {first_name, last_name, email, password, age} = req.body;
+        
+                const token = await userService.registerUser(first_name, last_name, email, password, age);
+        
+                res.cookie("authToken", token, { 
+                    maxAge: 300000,
+                    httpOnly: true
+                });
+        
+                res.redirect("/chat");
+            } catch (error) {
+                req.logger.error(`No se pudo registrar el usuario, ${error}`);
+            }
         }
-    }
 
     async validateUser(req, res) {
         try {
